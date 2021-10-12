@@ -1,0 +1,27 @@
+---
+title: "IPUMS_R"
+author: "Gabriel Kelvin"
+date: "10/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ipumsr)
+library(dplyr, warn.conflicts = FALSE)
+library(haven)
+```
+
+
+```{r}
+#Imports, removes labels and saves ACS data
+usa <- read_ipums_micro('xml-data/usa_xml.xml')
+usa <- zap_ipums_attributes(usa)
+write.csv(usa, 'Raw-Data/USA.csv')
+
+#Imports, removes labels and saves CPS data
+cps <- read_ipums_micro('xml-data/cps_xml.xml')
+cps <- zap_ipums_attributes(cps)
+write.csv(cps, 'Raw-Data/CPS.csv')
+```
+
